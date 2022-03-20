@@ -2,9 +2,25 @@
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
     </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
     <br>
 </p>
+
+This is a project for me just to learn/show some Knowledge taht i made in my Programing Career.
+This Project gets his data from this [Poké-API](https://pokeapi.co/). This API give you only Json-Responses.
+This Project makes this Respones to look prettier.
+
+Following Tasks are in the Making.....
+
+ - [x] search for Pokèmon and show them on the List
+ - [x] show Pokémon in an List
+ - [ ] Pagination for Pokémon-list
+ - [X] On CLick at one Pokémon show some Details in an Bootbox
+
+The list above will be extendend soon
+
+
+
+<h1 align="center">Yii 2 Basic Project Template</h1>
 
 Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 rapidly creating small projects.

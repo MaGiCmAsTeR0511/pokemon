@@ -4,9 +4,18 @@
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 use app\widgets\Alert;
+use yii\bootstrap4\Modal;
 
 $this->title = 'Pokemon';
+Modal::begin([
+    'id' => 'pokemondetailsmodal',
+    'title' => '',
+]);
+
+Modal::end();
+
 ?>
+
 <?php $form = ActiveForm::begin() ?>
 <div class="form-group">
 
@@ -17,9 +26,9 @@ $this->title = 'Pokemon';
     <div class="row">
         <?php
         if (!empty($response)):
-            foreach ($response as $pokemon):
+            foreach ($response as $id => $pokemon):
                 ?>
-                <div class="col-sm-3">
+                <div class="col-sm-2 form-group pokecard" data-id="<?= $id ?>" data-name="<?= $pokemon['name'] ?>">
                     <div class="card card-<?= $pokemon['types'][0] ?>" style="width: 10rem;">
                         <img class="picture-overview" src="<?= $pokemon['picture'] ?> " class="card-img-top"
                              alt="<?= $pokemon['name'] ?>">

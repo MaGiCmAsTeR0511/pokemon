@@ -64,9 +64,9 @@ a.desc:after {
     color: rgba(255, 255, 255, 0.5);
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 0;
@@ -83,121 +83,162 @@ a.desc:after {
     outline: none;
 }
 
-.picture-overview{
+.picture-overview {
     width: 100px;
-    height:100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.badge-grass{
+.picture-overview-detail {
+    width: 250px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.badge-grass {
     background-color: #78C855;
 }
 
 
-.badge-poison{
+.badge-poison {
     background-color: #A040A0;
 }
 
-.badge-fire{
+.badge-fire {
     background-color: #F08030;
 }
-.badge-water{
+
+.badge-water {
     background-color: #6890F0;
 }
-.badge-bug{
+
+.badge-bug {
     background-color: #A8B820;
 }
-.badge-flying{
+
+.badge-flying {
     background-color: #A890F0;
 }
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
-    background-color: #A8A878;
-}
-.badge-normal{
+
+.badge-normal {
     background-color: #A8A878;
 }
 
-.badge-normal{
+.badge-normal {
     background-color: #A8A878;
 }
-.badge-normal{
+
+.badge-normal {
     background-color: #A8A878;
 }
-.badge-normal{
+
+.badge-normal {
     background-color: #A8A878;
 }
-.badge-normal{
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
+    background-color: #A8A878;
+}
+
+.badge-normal {
     background-color: #A8A878;
 }
 

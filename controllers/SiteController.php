@@ -3,13 +3,11 @@
 namespace app\controllers;
 
 
-use phpDocumentor\Reflection\Types\False_;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\httpclient\Client;
 use yii\httpclient\Exception;
-use yii\httpclient\JsonParser;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -109,6 +107,8 @@ class SiteController extends Controller
         }
     }
 
+
+
     /**
      * Displays homepage.
      *
@@ -122,7 +122,7 @@ class SiteController extends Controller
             if (!empty($search)) {
                 $pokeinlist = $this->getSinglePokemon($search);
             } else {
-                $pokeinlist = $this->getListofPokemon(52, 0);
+                $pokeinlist = $this->getListofPokemon(20, 0);
 
             }
         } catch (\Exception $e) {
@@ -131,6 +131,12 @@ class SiteController extends Controller
 
 
         return $this->render('index', ['response' => $pokeinlist, 'value' => $search]);
+    }
+
+    public function actionDetails($id){
+      $pokemon =  $this->getSinglePokemon($id);
+
+      return $this->renderAjax('detail',['pokemon' => $pokemon[$id]]);
     }
 
     /**
@@ -206,6 +212,8 @@ class SiteController extends Controller
 
         $pokemons[$decoderesponse['id']]['name'] = $decoderesponse['name'];
         $pokemons[$decoderesponse['id']]['picture'] = $decoderesponse['sprites']['other']['dream_world']['front_default'];
+        $pokemons[$decoderesponse['id']]['height'] = $decoderesponse['height'];
+        $pokemons[$decoderesponse['id']]['weight'] = $decoderesponse['weight'];
         foreach ($decoderesponse['types'] as $key => $type) {
             $pokemons[$decoderesponse['id']]['types'][$key] = $type['type']['name'];
         }
