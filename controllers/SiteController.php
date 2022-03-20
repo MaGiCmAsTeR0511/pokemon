@@ -2,8 +2,13 @@
 
 namespace app\controllers;
 
+
+use phpDocumentor\Reflection\Types\False_;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
+use yii\httpclient\Client;
+use yii\httpclient\JsonParser;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -55,13 +60,50 @@ class SiteController extends Controller
     }
 
     /**
+     * @param $limit
+     * @param $offset
+     * @return void
+     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\httpclient\Exception
+     */
+    private function getListofPokemon($limit, $offset): array
+    {
+        $pokemons = [];
+        $client = new Client();
+        $response = $client->get('https://pokeapi.co/api/v2/pokemon/', ['limit' => $limit, 'offset' => $offset])
+            ->send();
+        $decoderesponse = Json::decode($response->content);
+
+        foreach ($decoderesponse['results'] as $pokemon) {
+            $responsedetail = $client->get($pokemon['url'])->send();
+            $details = Json::decode($responsedetail->content);
+            $pokemons[$details['id']]['name'] = $details['name'];
+            $pokemons[$details['id']]['picture'] = $details['sprites']['other']['dream_world']['front_default'];
+            foreach ($details['types'] as $key => $type) {
+                $pokemons[$details['id']]['types'][$key] = $type['type']['name'];
+            }
+
+        }
+        return $pokemons;
+    }
+
+    /**
      * Displays homepage.
      *
      * @return string
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+
+        $pokeinlist = $this->getListofPokemon(21, 0);
+
+
+        //$client = new Client(['baseUrl' => 'https://pokeapi.co/api/v2/pokemon/']);
+        //$response = $client->setMethod('GET')->setUrl('1')->send();
+
+
+        return $this->render('index', ['response' => $pokeinlist]);
     }
 
     /**
