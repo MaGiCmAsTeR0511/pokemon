@@ -8,6 +8,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\httpclient\Client;
+use yii\httpclient\Exception;
 use yii\httpclient\JsonParser;
 use yii\web\Controller;
 use yii\web\Response;
@@ -72,19 +73,40 @@ class SiteController extends Controller
         $client = new Client();
         $response = $client->get('https://pokeapi.co/api/v2/pokemon/', ['limit' => $limit, 'offset' => $offset])
             ->send();
-        $decoderesponse = Json::decode($response->content);
 
-        foreach ($decoderesponse['results'] as $pokemon) {
-            $responsedetail = $client->get($pokemon['url'])->send();
-            $details = Json::decode($responsedetail->content);
-            $pokemons[$details['id']]['name'] = $details['name'];
-            $pokemons[$details['id']]['picture'] = $details['sprites']['other']['dream_world']['front_default'];
-            foreach ($details['types'] as $key => $type) {
-                $pokemons[$details['id']]['types'][$key] = $type['type']['name'];
+        if ($response->isOk) {
+            $decoderesponse = Json::decode($response->content);
+
+            foreach ($decoderesponse['results'] as $pokemon) {
+                $responsedetail = $client->get($pokemon['url'])->send();
+                $pokemons = $this->getPokemonDetails($responsedetail, $pokemons);
             }
+            return $pokemons;
 
+        }else{
+            throw new Exception($response->content, $response->statusCode);
         }
-        return $pokemons;
+    }
+
+    /**
+     * @param $searchstring
+     * @return array
+     * @throws \yii\httpclient\Exception
+     */
+    private function getSinglePokemon($searchstring): array
+    {
+        $pokemons = [];
+        $client = new Client();
+        $response = $client->get('https://pokeapi.co/api/v2/pokemon/' . $searchstring)
+            ->send();
+
+        if ($response->isOk) {
+            $pokemons = $this->getPokemonDetails($response, $pokemons);
+
+            return $pokemons;
+        } else {
+            throw new Exception($response->content, $response->statusCode);
+        }
     }
 
     /**
@@ -94,16 +116,21 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $pokeinlist = [];
+        try {
+            $search = Yii::$app->request->post('searchstring');
+            if (!empty($search)) {
+                $pokeinlist = $this->getSinglePokemon($search);
+            } else {
+                $pokeinlist = $this->getListofPokemon(52, 0);
+
+            }
+        } catch (\Exception $e) {
+            Yii::$app->session->setFlash('danger', $e->getMessage());
+        }
 
 
-        $pokeinlist = $this->getListofPokemon(21, 0);
-
-
-        //$client = new Client(['baseUrl' => 'https://pokeapi.co/api/v2/pokemon/']);
-        //$response = $client->setMethod('GET')->setUrl('1')->send();
-
-
-        return $this->render('index', ['response' => $pokeinlist]);
+        return $this->render('index', ['response' => $pokeinlist, 'value' => $search]);
     }
 
     /**
@@ -166,5 +193,22 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    /**
+     * @param \yii\httpclient\Response $response
+     * @param array $pokemons
+     * @return array
+     */
+    private function getPokemonDetails(\yii\httpclient\Response $response, array $pokemons): array
+    {
+        $decoderesponse = Json::decode($response->content);
+
+        $pokemons[$decoderesponse['id']]['name'] = $decoderesponse['name'];
+        $pokemons[$decoderesponse['id']]['picture'] = $decoderesponse['sprites']['other']['dream_world']['front_default'];
+        foreach ($decoderesponse['types'] as $key => $type) {
+            $pokemons[$decoderesponse['id']]['types'][$key] = $type['type']['name'];
+        }
+        return $pokemons;
     }
 }
