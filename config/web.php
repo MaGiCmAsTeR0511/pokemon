@@ -48,6 +48,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '/' => 'site/index',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>'
             ],
         ],

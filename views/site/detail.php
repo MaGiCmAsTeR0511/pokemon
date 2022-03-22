@@ -34,10 +34,10 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>height: <?= $pokemon['height'] ?></td>
+                    <td>height: <?= $pokemon['height'] ?> m</td>
                 </tr>
                 <tr>
-                    <td>weight: <?= $pokemon['weight'] ?></td>
+                    <td>weight: <?= $pokemon['weight'] ?> kg</td>
                 </tr>
                 </tbody>
             </table>

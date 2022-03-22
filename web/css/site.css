@@ -1,5 +1,20 @@
+@font-face {
+    font-family: Pokemonsolid;
+    src: url('../fonts/Pokemon_Solid.ttf');
+}
+
+@font-face {
+    font-family: Pokemonhollow;
+    src: url('../fonts/Pokemon_Hollow.ttf');
+}
+
+header{
+    font-family: Pokemonsolid;
+}
+
 main > .container {
     padding: 70px 15px 20px;
+    font-family: Pokemonsolid;
 }
 
 .footer {
@@ -97,6 +112,10 @@ a.desc:after {
     margin-right: auto;
 }
 
+.card-body{
+    min-height:2px;
+}
+
 .badge-grass {
     background-color: #78C855;
 }
@@ -122,124 +141,53 @@ a.desc:after {
     background-color: #A890F0;
 }
 
-.badge-normal {
+.badge-electric {
+    background-color: #F8D030;
+}
+
+.badge-ice {
+    background-color: #98D8D8;
+}
+
+.badge-fighting {
+    background-color: #C03028;
+}
+
+.badge-ground {
+    background-color: #E0C068;
+}
+
+.badge-psychic {
+    background-color: #F85888;
+}
+
+.badge-rock {
+    background-color: #B8A038;
+}
+
+.badge-ghost {
+    background-color: #705898;
+}
+
+.badge-dark {
+    background-color: #705848;
+}
+
+.badge-dragon {
+    background-color: #7038F8;
+}
+
+.badge-steel {
+    background-color: #B8B8D0;
+}
+
+.badge-fairy {
+    background-color: #F0B6BC;
+}
+
+.badge-normal{
     background-color: #A8A878;
 }
 
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
-
-.badge-normal {
-    background-color: #A8A878;
-}
 
 

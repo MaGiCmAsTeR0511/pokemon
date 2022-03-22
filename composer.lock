@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98137ef4ccfa0b045383d01e2733386b",
+    "content-hash": "6821d1565341573a627ca22e0ebe96c5",
     "packages": [
         {
             "name": "bower-asset/inputmask",
@@ -220,6 +220,52 @@
                 }
             ],
             "time": "2022-02-28T11:07:21+00:00"
+        },
+        {
+            "name": "edwinhaq/yii2-simple-loading",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edwinhaq/yii2-simple-loading.git",
+                "reference": "c5d42daff0d3e58e5ca526199665fa5b3cbdf22a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edwinhaq/yii2-simple-loading/zipball/c5d42daff0d3e58e5ca526199665fa5b3cbdf22a",
+                "reference": "c5d42daff0d3e58e5ca526199665fa5b3cbdf22a",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">2.0.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "edwinhaq\\simpleloading\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Edwin Artunduaga",
+                    "email": "edwinhaq@gmail.com",
+                    "homepage": "https://github.com/edwinhaq"
+                }
+            ],
+            "description": "Simple Loading",
+            "keywords": [
+                "extension",
+                "loading",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/edwinhaq/yii2-simple-loading/issues",
+                "source": "https://github.com/edwinhaq/yii2-simple-loading/tree/master"
+            },
+            "time": "2017-10-31T03:23:24+00:00"
         },
         {
             "name": "egulias/email-validator",

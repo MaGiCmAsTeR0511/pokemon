@@ -2,8 +2,8 @@
 
 namespace app\controllers;
 
-
 use Yii;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\httpclient\Client;
@@ -72,18 +72,43 @@ class SiteController extends Controller
         $response = $client->get('https://pokeapi.co/api/v2/pokemon/', ['limit' => $limit, 'offset' => $offset])
             ->send();
 
-        if ($response->isOk) {
-            $decoderesponse = Json::decode($response->content);
 
+        if ($response->isOk) {
+            $return = [];
+            $decoderesponse = Json::decode($response->content);
+            $link['totalCount'] = $decoderesponse['count'];
+            $link['next'] = $decoderesponse['next'];
+            $link['previous'] = $decoderesponse['previous'];
+            $return['link'] = $link;
             foreach ($decoderesponse['results'] as $pokemon) {
                 $responsedetail = $client->get($pokemon['url'])->send();
-                $pokemons = $this->getPokemonDetails($responsedetail, $pokemons);
+                $return['pokemon'][] = $this->getPokemonDetails($responsedetail, $pokemons);
             }
-            return $pokemons;
+            return $return;
 
-        }else{
+        } else {
             throw new Exception($response->content, $response->statusCode);
         }
+    }
+
+    private function getEvolutionsOfPokemon($id){
+        $evolutions = [];
+        $client = new Client();
+        $response = $client->get('https://pokeapi.co/api/v2/evolution-chain/' . $id.'/')
+            ->send();
+        if ($response->isOk) {
+            $chain = Json::decode($response->content);
+
+            echo '<pre>'.print_r($chain['chain']['evolves_to'],true).'</pre>';
+            die();
+            return $pokemon;
+        } else {
+            throw new Exception($response->content, $response->statusCode);
+        }
+    }
+
+    private function getEvolutions($evolvesto){
+
     }
 
     /**
@@ -99,14 +124,14 @@ class SiteController extends Controller
             ->send();
 
         if ($response->isOk) {
-            $pokemons = $this->getPokemonDetails($response, $pokemons);
+            $pokemon['pokemon'] = [];
+            $pokemon['pokemon'][] = $this->getPokemonDetails($response, $pokemons);
 
-            return $pokemons;
+            return $pokemon;
         } else {
             throw new Exception($response->content, $response->statusCode);
         }
     }
-
 
 
     /**
@@ -116,27 +141,39 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $pokeinlist = [];
+        $limit = 20;
+        $offset = 0;
+        $pokeinlist['pokemon'] = [];
+        $pagination = new Pagination();
         try {
             $search = Yii::$app->request->post('searchstring');
+
             if (!empty($search)) {
                 $pokeinlist = $this->getSinglePokemon($search);
-            } else {
-                $pokeinlist = $this->getListofPokemon(20, 0);
 
+            } else {
+                $offset = 20 * Yii::$app->request->get('page');
+                $pokeinlist = $this->getListofPokemon($limit, $offset);
+                $pagination = new Pagination(['totalCount' => $pokeinlist['link']['totalCount'], 'pageSize' => $limit, 'pageSizeParam' => false]);
             }
         } catch (\Exception $e) {
             Yii::$app->session->setFlash('danger', $e->getMessage());
         }
 
-
-        return $this->render('index', ['response' => $pokeinlist, 'value' => $search]);
+        return $this->render('index', ['pokemons' => $pokeinlist['pokemon'], 'value' => $search, 'pagination' => $pagination]);
     }
 
-    public function actionDetails($id){
-      $pokemon =  $this->getSinglePokemon($id);
+    /**
+     * @param $id
+     * @return string
+     * @throws Exception
+     */
+    public function actionDetails($id)
+    {
+        $pokemon = $this->getSinglePokemon($id);
+        //$evolutions = $this->getEvolutionsOfPokemon($id);
 
-      return $this->renderAjax('detail',['pokemon' => $pokemon[$id]]);
+        return $this->renderAjax('detail', ['pokemon' => $pokemon['pokemon'][0]]);
     }
 
     /**
@@ -209,13 +246,13 @@ class SiteController extends Controller
     private function getPokemonDetails(\yii\httpclient\Response $response, array $pokemons): array
     {
         $decoderesponse = Json::decode($response->content);
-
-        $pokemons[$decoderesponse['id']]['name'] = $decoderesponse['name'];
-        $pokemons[$decoderesponse['id']]['picture'] = $decoderesponse['sprites']['other']['dream_world']['front_default'];
-        $pokemons[$decoderesponse['id']]['height'] = $decoderesponse['height'];
-        $pokemons[$decoderesponse['id']]['weight'] = $decoderesponse['weight'];
+        $pokemons['id'] = $decoderesponse['id'];
+        $pokemons['name'] = $decoderesponse['name'];
+        $pokemons['picture'] = $decoderesponse['sprites']['other']['dream_world']['front_default'];
+        $pokemons['height'] = $decoderesponse['height']/10;
+        $pokemons['weight'] = $decoderesponse['weight']/10;
         foreach ($decoderesponse['types'] as $key => $type) {
-            $pokemons[$decoderesponse['id']]['types'][$key] = $type['type']['name'];
+            $pokemons['types'][$key] = $type['type']['name'];
         }
         return $pokemons;
     }
