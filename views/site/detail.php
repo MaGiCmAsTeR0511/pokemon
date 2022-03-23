@@ -1,12 +1,12 @@
 <?php
-/** @var $pokemon */
+/** @var $pokemon \app\models\Pokemon */
 
 ?>
 
 <div>
     <div class="picture-overview-detail">
-        <img class="picture-overview-detail" src="<?= $pokemon['picture'] ?> "
-             alt="<?= $pokemon['name'] ?>">
+        <img class="picture-overview-detail" src="<?= $pokemon->picture ?> "
+             alt="<?= $pokemon->name ?>">
     </div>
     <div class="row">
         <div class="col-sm-6 mx-auto justify-content-center">
@@ -17,7 +17,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($pokemon['types'] as $type): ?>
+                <?php foreach ($pokemon->types as $type): ?>
                     <tr>
                         <td><span class="badge badge-pill badge-<?= $type ?>"><?= $type ?></span></td>
                     </tr>
@@ -34,10 +34,10 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>height: <?= $pokemon['height'] ?> m</td>
+                    <td>height: <?= $pokemon->height ?> m</td>
                 </tr>
                 <tr>
-                    <td>weight: <?= $pokemon['weight'] ?> kg</td>
+                    <td>weight: <?= $pokemon->weight ?> kg</td>
                 </tr>
                 </tbody>
             </table>

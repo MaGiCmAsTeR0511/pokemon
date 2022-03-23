@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Pokemon;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -91,15 +92,16 @@ class SiteController extends Controller
         }
     }
 
-    private function getEvolutionsOfPokemon($id){
+    private function getEvolutionsOfPokemon($id)
+    {
         $evolutions = [];
         $client = new Client();
-        $response = $client->get('https://pokeapi.co/api/v2/evolution-chain/' . $id.'/')
+        $response = $client->get('https://pokeapi.co/api/v2/evolution-chain/' . $id . '/')
             ->send();
         if ($response->isOk) {
             $chain = Json::decode($response->content);
 
-            echo '<pre>'.print_r($chain['chain']['evolves_to'],true).'</pre>';
+            echo '<pre>' . print_r($chain['chain']['evolves_to'], true) . '</pre>';
             die();
             return $pokemon;
         } else {
@@ -107,7 +109,8 @@ class SiteController extends Controller
         }
     }
 
-    private function getEvolutions($evolvesto){
+    private function getEvolutions($evolvesto)
+    {
 
     }
 
@@ -152,7 +155,10 @@ class SiteController extends Controller
                 $pokeinlist = $this->getSinglePokemon($search);
 
             } else {
-                $offset = 20 * Yii::$app->request->get('page');
+
+                $offset = 20 * (Yii::$app->request->get('page') - 1);
+                $offset = max($offset, 0);
+
                 $pokeinlist = $this->getListofPokemon($limit, $offset);
                 $pagination = new Pagination(['totalCount' => $pokeinlist['link']['totalCount'], 'pageSize' => $limit, 'pageSizeParam' => false]);
             }
@@ -243,17 +249,18 @@ class SiteController extends Controller
      * @param array $pokemons
      * @return array
      */
-    private function getPokemonDetails(\yii\httpclient\Response $response, array $pokemons): array
+    private function getPokemonDetails(\yii\httpclient\Response $response, array $pokemons): object
     {
+        $pokemon = new Pokemon();
         $decoderesponse = Json::decode($response->content);
-        $pokemons['id'] = $decoderesponse['id'];
-        $pokemons['name'] = $decoderesponse['name'];
-        $pokemons['picture'] = $decoderesponse['sprites']['other']['dream_world']['front_default'];
-        $pokemons['height'] = $decoderesponse['height']/10;
-        $pokemons['weight'] = $decoderesponse['weight']/10;
+        $pokemon->id = $decoderesponse['id'];
+        $pokemon->name = $decoderesponse['name'];
+        $pokemon->picture = $decoderesponse['sprites']['other']['dream_world']['front_default'];
+        $pokemon->height = $decoderesponse['height'] / 10;
+        $pokemon->weight = $decoderesponse['weight'] / 10;
         foreach ($decoderesponse['types'] as $key => $type) {
-            $pokemons['types'][$key] = $type['type']['name'];
+            $pokemon->types[] = $type['type']['name'];
         }
-        return $pokemons;
+        return $pokemon;
     }
 }

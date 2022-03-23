@@ -1,5 +1,6 @@
 <?php
 /** @var yii\web\View $this */
+/** @var  $pokemons \app\models\Pokemon []*/
 
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -15,8 +16,6 @@ Modal::begin([
 ]);
 
 Modal::end();
-
-SimpleLoading::widget();
 ?>
 
 
@@ -35,14 +34,14 @@ SimpleLoading::widget();
         if (!empty($pokemons)):
             foreach ($pokemons as $id => $pokemon):
                 ?>
-                <div class="col-sm-2 form-group pokecard" data-id="<?= $pokemon['id'] ?>"
-                     data-name="<?= $pokemon['name'] ?>">
-                    <div class="card card-<?= $pokemon['types'][0] ?>" style="width: 10rem;">
-                        <img class="picture-overview" src="<?= $pokemon['picture'] ?> " class="card-img-top"
-                             alt="<?= $pokemon['name'] ?>">
+                <div class="col-sm-2 form-group pokecard" data-id="<?= $pokemon->id ?>"
+                     data-name="<?= $pokemon->name ?>">
+                    <div class="card card-<?= $pokemon->types[0] ?>" style="width: 10rem;">
+                        <img class="picture-overview" src="<?= $pokemon->picture ?> " class="card-img-top"
+                             alt="<?= $pokemon->name ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $pokemon['name'] ?></h5>
-                            <?php foreach ($pokemon['types'] as $type): ?>
+                            <h5 class="card-title"><?= $pokemon->name ?></h5>
+                            <?php foreach ($pokemon->types as $type): ?>
                                 <span class="badge badge-pill badge-<?= $type ?>"><?= $type ?></span>
                             <?php endforeach; ?>
                         </div>
