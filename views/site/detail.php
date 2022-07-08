@@ -25,7 +25,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-6 mx-auto justify-content-center">
+        <div class="col-sm-6 mx-auto justify-content-center" style="width: 62px">
+            <button class="info_btn">see more infos</button>
+            <!--
             <table class="">
                 <thead>
                 <tr>
@@ -41,6 +43,7 @@
                 </tr>
                 </tbody>
             </table>
+            !-->
         </div>
     </div>
 </div>
