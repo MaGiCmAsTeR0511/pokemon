@@ -17,8 +17,9 @@ main > .container {
     font-family: Verdana;
 }
 
-.card {
-    background-color: #ffffff;
+.card-body {
+    //background-color: #ffffff;
+    //background-image: linear-gradient(45deg, green, aqua);
     transition: 0.2s ease-out;
     transform: scale(1);
 }
@@ -37,10 +38,6 @@ main > .container {
 
 body{
     background-image: url("../media/pokemon_arena.jpg");
-}
-
-form input[type="text"] {
-    text-transform: lowercase;
 }
 
 .picture-overview-detail{
@@ -75,6 +72,24 @@ form input[type="text"] {
     background-color: limegreen;
 }
 
+.compare_btn{
+    position: relative;
+    margin-top: 5%;
+    background-color: orange;
+}
+
+.hide_info_btn{
+    position: relative;
+    margin-top: 12%;
+    background-color: #117a8b;
+}
+
+.table_moves{
+    border: black 2px dotted;
+    text-align: center;
+    padding: 1%;
+}
+
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
     40% {transform: translateY(-20px);}
@@ -87,6 +102,32 @@ form input[type="text"] {
 
 .modal-title{
     font-weight: bold;
+}
+
+.modal-body {
+    /**
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+    **/
+}
+
+.modal-content {
+    /**
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    **/
 }
 
 .footer {
@@ -190,75 +231,92 @@ a.desc:after {
 
 .badge-grass {
     background-color: #78C855;
+    border: black 0.01em solid;
 }
-
 
 .badge-poison {
     background-color: #A040A0;
+    border: black 0.01em solid;
 }
 
 .badge-fire {
     background-color: #F08030;
+    border: black 0.01em solid;
 }
 
 .badge-water {
     background-color: #6890F0;
+    border: black 0.01em solid;
 }
 
 .badge-bug {
     background-color: #A8B820;
+    border: black 0.01em solid;
 }
 
 .badge-flying {
     background-color: #A890F0;
+    border: black 0.01em solid;
 }
 
 .badge-electric {
     background-color: #F8D030;
+    border: black 0.01em solid;
 }
 
 .badge-ice {
     background-color: #98D8D8;
+    border: black 0.01em solid;
 }
 
 .badge-fighting {
     background-color: #C03028;
+    border: black 0.01em solid;
 }
 
 .badge-ground {
     background-color: #E0C068;
+    border: black 0.01em solid;
 }
 
 .badge-psychic {
     background-color: #F85888;
+    border: black 0.01em solid;
 }
 
 .badge-rock {
     background-color: #B8A038;
+    border: black 0.01em solid;
 }
 
 .badge-ghost {
     background-color: #705898;
+    border: black 0.01em solid;
 }
 
 .badge-dark {
     background-color: #705848;
+    border: black 0.01em solid;
 }
 
 .badge-dragon {
     background-color: #7038F8;
+    border: black 0.01em solid;
 }
 
 .badge-steel {
     background-color: #B8B8D0;
+    border: black 0.01em solid;
 }
 
 .badge-fairy {
     background-color: #F0B6BC;
+    border: black 0.01em solid;
 }
 
 .badge-normal{
     background-color: #A8A878;
+    border: black 0.01em solid;
 }
 
 .pokemon {

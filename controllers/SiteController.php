@@ -152,7 +152,7 @@ class SiteController extends Controller
             $search = Yii::$app->request->post('searchstring');
 
             if (!empty($search)) {
-                $pokeinlist = $this->getSinglePokemon($search);
+                $pokeinlist = $this->getSinglePokemon(strtolower($search));
 
             } else {
 
@@ -251,6 +251,7 @@ class SiteController extends Controller
      */
     private function getPokemonDetails(\yii\httpclient\Response $response, array $pokemons): object
     {
+
         $pokemon = new Pokemon();
         $decoderesponse = Json::decode($response->content);
         $pokemon->id = $decoderesponse['id'];
@@ -258,9 +259,15 @@ class SiteController extends Controller
         $pokemon->picture = $decoderesponse['sprites']['other']['dream_world']['front_default'];
         $pokemon->height = $decoderesponse['height'] / 10;
         $pokemon->weight = $decoderesponse['weight'] / 10;
+
         foreach ($decoderesponse['types'] as $key => $type) {
             $pokemon->types[] = $type['type']['name'];
         }
+
+        foreach ($decoderesponse['moves'] as $key => $move) {
+            $pokemon->moves[] = $move['move']['name'];
+        }
+        //var_dump($pokemon->moves);
         return $pokemon;
     }
 }

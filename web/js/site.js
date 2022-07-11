@@ -25,3 +25,24 @@ $('document').ready(function () {
     })
 
 })
+
+function show_table()
+{
+    document.getElementById("table_div").style.display = "flex";
+    document.getElementById("info_btn").style.display = "none";
+    document.getElementById("compare_btn").style.display = "flex";
+    document.getElementById("hide_info_btn").style.display = "flex";
+}
+
+function hide_table()
+{
+    document.getElementById("table_div").style.display = "none";
+    document.getElementById("info_btn").style.display = "flex";
+    document.getElementById("compare_btn").style.display = "none";
+    document.getElementById("hide_info_btn").style.display = "none";
+}
+
+function compare_pokemon()
+{
+
+}
