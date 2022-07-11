@@ -183,6 +183,19 @@ class SiteController extends Controller
     }
 
     /**
+     * @param $first
+     * @param $second
+     * @return void
+     */
+    public function actionCompare($first, $second){
+
+    }
+
+    private function ComparePokemon($first,$second){
+
+    }
+
+    /**
      * Login action.
      *
      * @return Response|string

@@ -140,11 +140,9 @@
         </div>
         </div>
         <button class="info_btn hide_info_btn" id="hide_info_btn" style="display: none" onclick="hide_table()">hide infos</button>
-        <form action=".../views/site/compare.php" method="post">
+        <form action="" method="post">
+            <input type="hidden" value="<?php $pokemon?>" name="pokemonObject">
             <input type="submit" value="compare with..." name="compare" class="info_btn compare_btn " id="compare_btn" style="display: none" />
         </form>
-
-
-
 
 </div>

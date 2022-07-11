@@ -42,7 +42,3 @@ function hide_table()
     document.getElementById("hide_info_btn").style.display = "none";
 }
 
-function compare_pokemon()
-{
-
-}

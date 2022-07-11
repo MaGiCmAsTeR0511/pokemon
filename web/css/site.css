@@ -22,6 +22,12 @@ main > .container {
     //background-image: linear-gradient(45deg, green, aqua);
     transition: 0.2s ease-out;
     transform: scale(1);
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.card{
+    border: 0px solid rgba(0, 0, 0, 0.125);
 }
 
 .card:hover{
@@ -124,7 +130,7 @@ body{
     pointer-events: auto;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+
     border-radius: 0.3rem;
     outline: 0;
     **/
