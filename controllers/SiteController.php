@@ -100,10 +100,13 @@ class SiteController extends Controller
             ->send();
         if ($response->isOk) {
             $chain = Json::decode($response->content);
+            if(!empty($chain['chain']['evolves_to'])){
+                //foreach($chain['chain']['evolves_to'])
+            }
+           // echo '<pre>' . print_r($chain['chain']['evolves_to'], true) . '</pre>';
+            //die();
 
-            echo '<pre>' . print_r($chain['chain']['evolves_to'], true) . '</pre>';
-            die();
-            return $pokemon;
+            return $chain;
         } else {
             throw new Exception($response->content, $response->statusCode);
         }
@@ -182,20 +185,7 @@ class SiteController extends Controller
         return $this->renderAjax('detail', ['pokemon' => $pokemon['pokemon'][0]]);
     }
 
-    /**
-     * @param $first
-     * @param $second
-     * @return void
-     */
-    public function actionCompare($first, $second){
-
-    }
-
-    private function ComparePokemon($first,$second){
-
-    }
-
-    /**
+        /**
      * Login action.
      *
      * @return Response|string
@@ -280,7 +270,9 @@ class SiteController extends Controller
         foreach ($decoderesponse['moves'] as $key => $move) {
             $pokemon->moves[] = $move['move']['name'];
         }
-        //var_dump($pokemon->moves);
+
+        $pokemon->evolutions = $this->getEvolutionsOfPokemon($pokemon->id);
+        //var_dump($pokemon->evolutions);
         return $pokemon;
     }
 }

@@ -13,6 +13,7 @@ class Pokemon extends Model
     public $weight;
     public $height;
     public $moves = [];
+    public $evolutions = [];
 
 
 
