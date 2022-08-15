@@ -92,7 +92,7 @@ class SiteController extends Controller
         }
     }
 
-    private function getEvolutionsOfPokemon($id)
+    /*private function getEvolutionsOfPokemon($id)
     {
         $evolutions = [];
         $client = new Client();
@@ -110,7 +110,7 @@ class SiteController extends Controller
         } else {
             throw new Exception($response->content, $response->statusCode);
         }
-    }
+    }*/
 
     private function getEvolutions($evolvesto)
     {
@@ -147,7 +147,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $limit = 20;
+        $limit = 18;
         $offset = 0;
         $pokeinlist['pokemon'] = [];
         $pagination = new Pagination();
@@ -159,7 +159,7 @@ class SiteController extends Controller
 
             } else {
 
-                $offset = 20 * (Yii::$app->request->get('page') - 1);
+                $offset = 18 * (Yii::$app->request->get('page') - 1);
                 $offset = max($offset, 0);
 
                 $pokeinlist = $this->getListofPokemon($limit, $offset);
@@ -172,6 +172,10 @@ class SiteController extends Controller
         return $this->render('index', ['pokemons' => $pokeinlist['pokemon'], 'value' => $search, 'pagination' => $pagination]);
     }
 
+    public function actionPage($page){
+
+    }
+
     /**
      * @param $id
      * @return string
@@ -180,7 +184,7 @@ class SiteController extends Controller
     public function actionDetails($id)
     {
         $pokemon = $this->getSinglePokemon($id);
-        //$evolutions = $this->getEvolutionsOfPokemon($id);
+        /*$evolutions = $this->getEvolutionsOfPokemon($id);*/
 
         return $this->renderAjax('detail', ['pokemon' => $pokemon['pokemon'][0]]);
     }
@@ -195,7 +199,6 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
@@ -271,8 +274,27 @@ class SiteController extends Controller
             $pokemon->moves[] = $move['move']['name'];
         }
 
-        $pokemon->evolutions = $this->getEvolutionsOfPokemon($pokemon->id);
+        //$pokemon->evolutions = $this->getEvolutionsOfPokemon($pokemon->id);
         //var_dump($pokemon->evolutions);
         return $pokemon;
+    }
+
+    private function getEvolutionsOfPokemon($id)
+    {
+        $client = new Client();
+        $response = $client->createRequest()
+            ->setMethod('GET')
+            ->setUrl('https://pokeapi.co/api/v2/evolution-chain/' . $id)
+            ->send();
+        if ($response->isOk) {
+            $decoderesponse = Json::decode($response->content);
+            $evolutions = [];
+            foreach ($decoderesponse['evolution_chain']['evolves_to'] as $key => $evolution) {
+                $evolutions[] = $evolution['species']['name'];
+            }
+            return $evolutions;
+        } else {
+            throw new Exception($response->content, $response->statusCode);
+        }
     }
 }

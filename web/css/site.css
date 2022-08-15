@@ -1,3 +1,5 @@
+
+
 @font-face {
     font-family: Pokemonsolid;
     src: url('../fonts/Pokemon_Solid.ttf');
@@ -27,11 +29,10 @@ main > .container {
 }
 
 .card{
-    border: 0px solid rgba(0, 0, 0, 0.125);
+    border: 1px solid black;
 }
 
 .card:hover{
-    background-color: #e2f7d2;
     transition: 10ms;
     transform: scale(1.1);
     cursor: pointer;
@@ -233,6 +234,64 @@ a.desc:after {
 
 .card-body{
     min-height:2px;
+}
+
+.card-water{
+    background: rgba(104, 144, 240, 0.7);
+}
+.card-grass{
+    background: rgba(120, 200, 85, 0.7);
+}
+.card-poison{
+    background: rgba(160, 64, 160, 0.7);
+}
+.card-fire{
+    background: rgba(240, 128, 48, 0.7);
+}
+.card-bug{
+    background: rgba(168, 184, 32, 0.7);
+}
+
+.card-flying{
+    background: rgba(168, 144, 240, 0.7);
+}
+
+.card-electric{
+    background: rgba(248, 208, 48, 0.7);
+}
+.card-ice{
+    background: rgba(152, 216, 216, 0.7);
+ }
+.card-fighting{
+    background: rgba(192, 48, 40, 0.7);
+}
+.card-ground{
+    background: rgba(224, 192, 104, 0.7);
+}
+.card-psychic{
+    background: rgba(248, 88, 136, 0.7);
+}
+.card-rock{
+    background: rgba(184, 160, 56, 0.7);
+}
+.card-ghost{
+    background: rgba(112, 88, 152, 0.7);
+}
+.card-dark{
+    background: rgba(112, 88, 72, 0.7);
+}
+.card-dragon{
+    background: rgba(112, 56, 248, 0.7)
+}
+.card-steel{
+    background: rgba(184, 184, 208, 0.7)
+}
+
+.card-fairy{
+    background: rgba(240, 182, 188, 0.7);
+}
+.card-normal{
+    background: rgba(168, 168, 120, 0.7)
 }
 
 .badge-grass {
