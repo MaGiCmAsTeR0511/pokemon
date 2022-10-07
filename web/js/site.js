@@ -10,10 +10,13 @@ $('document').ready(function () {
                 $('.modal-body').html('<div style="display: flex; justify-content: center"><div class="pokemon"> </div></div>');
             },
             success: function (response) {
+
                 const modalbody = $('.modal-body');
                 modalbody.html();
                 $('#pokemondetailsmodal-label').html(name)
                 modalbody.html(response);
+                /*const audio = new Audio("Pokemon_sound.mp3");
+                audio.play();*/
             }
         });
     })
@@ -30,7 +33,7 @@ $('document').ready(function () {
 
 function show_table()
 {
-    document.getElementById("table_div").style.display = "flex";
+    document.getElementById("table_div").style.display = "block";
     document.getElementById("info_btn").style.display = "none";
     //document.getElementById("compare_btn").style.display = "flex";
     document.getElementById("hide_info_btn").style.display = "flex";

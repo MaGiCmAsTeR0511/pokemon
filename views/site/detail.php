@@ -1,6 +1,10 @@
 <?php
 /** @var $pokemon /app/models/Pokemon */
 
+/**
+ * Counter for the quantity of Moves in one tr
+ */
+$counter = 0;
 ?>
 
 <div>
@@ -42,28 +46,29 @@
             <tbody>
             <tr>
                 <td><b>height:</b> <?= $pokemon->height ?> <b>m</b></td>
-            </tr>
-            <tr>
                 <td><b>weight:</b> <?= $pokemon->weight ?> <b>kg</b></td>
-            </tr>
-            <tr>
-                <td><b>moves:</b></td>
-            </tr>
-            <tr class="table_moves">
-                <?php $counter = 0;
-                foreach ($pokemon->moves as $move):
-                if ($counter % 4 == 0): ?>
-            <tr class="table_moves"></tr>
-            <?php
-            endif; ?>
-            <td class="table_moves"><?= $move ?></td>
-            <?php $counter++;
-            endforeach; ?>
-
             </tr>
 
             </tbody>
         </table>
+        <table class="pokemon_moves">
+            <thead>
+                <th><u>Moves</u></th>
+            </thead>
+                <?php
+                foreach ($pokemon->moves as $move):
+                if ($counter % 4 == 0 ||$counter == 0 ): ?>
+            <tr>
+            <?php
+            endif; ?>
+            <td><?= $move ?></td>
+            <?php $counter++;?>
+               <?php if ($counter % 4 == 0): ?>
+            </tr>
+            <?php endif;
+            endforeach; ?>
+        </table>
+
     </div>
 </div>
 <div class="row">
@@ -78,8 +83,5 @@
 </div>
 <button class="info_btn hide_info_btn" id="hide_info_btn" style="display: none" onclick="hide_table()">hide infos
 </button>
-
-<?php ?>
-
 
 </div>

@@ -134,9 +134,8 @@ class SiteController extends Controller
             $pokemon['pokemon'][] = $this->getPokemonDetails($response, $pokemons);
 
             return $pokemon;
-        } else {
-            throw new Exception($response->content, $response->statusCode);
         }
+        throw new Exception($response->content, $response->statusCode);
     }
 
 
